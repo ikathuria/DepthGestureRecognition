@@ -24,7 +24,7 @@ if __name__ == '__main__':
     PATH = MODEL_DATA[MODE][1]
 
     # load model
-    new_model = Conv3DModel()
+    model = Conv3DModel(MODE)
     new_model.compile(loss='sparse_categorical_crossentropy',
                       optimizer=RMSprop())
     new_model.load_weights(PATH)

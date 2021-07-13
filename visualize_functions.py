@@ -22,10 +22,8 @@ def normalize_data(np_data):
 
 
 class Conv3DModel(Model):
-    def __init__(self):
+    def __init__(self, n_classes):
         super(Conv3DModel, self).__init__()
-
-        n_classes = len(CLASSES)
 
         # convolutions
         self.conv1 = Conv3D(
