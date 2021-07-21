@@ -9,7 +9,14 @@ if __name__ == '__main__':
                        'Sliding Two Fingers Left',
                        'No gesture',
                        'Thumb Up'],
-                      r'weights\4_classes\path_to_my_weights.index'],
+                      r'weights\4_classes\path_to_my_weights'],
+                  6: [['No gesture',
+                       'Stop Sign',
+                       'Swiping Left',
+                       'Swiping Right',
+                       'Thumb Down',
+                       'Thumb Up'],
+                      r'weights\6_classes1\path_to_my_weights'],
                   8: [['No gesture',
                        'Sliding Two Fingers Down',
                        'Sliding Two Fingers Left',
@@ -17,18 +24,18 @@ if __name__ == '__main__':
                        'Sliding Two Fingers Up',
                        'Thumb Down',
                        'Thumb Up'],
-                      r'weights\8_classes\path_to_my_weights.index']}
-
-    MODE = 4
+                      r'weights\8_classes\path_to_my_weights']}
+    print(1)
+    MODE = 6
     CLASSES = MODEL_DATA[MODE][0]
     PATH = MODEL_DATA[MODE][1]
 
     # load model
-    model = Conv3DModel(MODE)
-    new_model.compile(loss='sparse_categorical_crossentropy',
+    model = Conv3DModel(8)
+    model.compile(loss='sparse_categorical_crossentropy',
                       optimizer=RMSprop())
-    new_model.load_weights(PATH)
-
+    model.load_weights(PATH)
+    print(2)
     to_predict = []
     num_frames = 0
     text = ''
@@ -37,7 +44,7 @@ if __name__ == '__main__':
     while True:
         # capture frame-by-frame
         ret, frame = cap.read()
-
+        print(3)
         # processing the frames
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         to_predict.append(cv2.resize(gray, (64, 64)))
@@ -46,7 +53,7 @@ if __name__ == '__main__':
             frame_to_predict = np.array(to_predict, dtype=np.float32)
             frame_to_predict = normalize_data(frame_to_predict)
 
-            predict = new_model.predict(frame_to_predict)
+            predict = model.predict(frame_to_predict)
             predicted_class = CLASSES[np.argmax(predict)]
 
             text = 'Class=%s Precision=%.2f %%' % (
