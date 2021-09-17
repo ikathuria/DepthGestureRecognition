@@ -1,7 +1,10 @@
 """Visualizing the trained model."""
+
+print('loading imports...', end="")
 from visualize_functions import *
 import numpy as np
 import cv2
+print('imports loaded')
 
 
 if __name__ == '__main__':
@@ -25,26 +28,27 @@ if __name__ == '__main__':
                        'Thumb Down',
                        'Thumb Up'],
                       r'weights\8_classes\path_to_my_weights']}
-    print(1)
     MODE = 6
     CLASSES = MODEL_DATA[MODE][0]
     PATH = MODEL_DATA[MODE][1]
 
     # load model
+    print('loading model...', end="")
     model = Conv3DModel(8)
     model.compile(loss='sparse_categorical_crossentropy',
                       optimizer=RMSprop())
     model.load_weights(PATH)
-    print(2)
+    print('model loaded')
     to_predict = []
     num_frames = 0
     text = ''
+
+    print('loading OpenCV...')
     cap = cv2.VideoCapture(0)
 
     while True:
         # capture frame-by-frame
         ret, frame = cap.read()
-        print(3)
         # processing the frames
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         to_predict.append(cv2.resize(gray, (64, 64)))
