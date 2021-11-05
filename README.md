@@ -1,2 +1,3 @@
-# MotionGestureRecogniton
-A Gesture Recognition model made with a 3D-CNN using the 20bnJester dataset.
+# Motion Gesture Recogniton
+
+Check out the [wiki](https://github.com/ikathuria/DepthGestureRecogniton/wiki) for detailed information about the project!
